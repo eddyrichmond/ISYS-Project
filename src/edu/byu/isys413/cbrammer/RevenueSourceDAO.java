@@ -82,7 +82,8 @@ public class RevenueSourceDAO {
   /** Internal method to read an existing pkg from the database */
   synchronized RevenueSource read(String id, Connection conn) throws Exception {
       RevenueSource pkg = new RevenueSource(id);
-      
+
+
     // pull from database and populate the object
       PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM revenueSource WHERE guid LIKE ?");
       pstmt.setString(1, id);

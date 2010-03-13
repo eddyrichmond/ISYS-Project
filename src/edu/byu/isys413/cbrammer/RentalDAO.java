@@ -104,10 +104,15 @@ public class RentalDAO {
       if (rs.next()) {
             pkg.setObjectAlreadyInDB(true);
             pkg.setDirty(false);
-            pkg.setDateOut(Timestamp.valueOf(rs.getString(2)));
-            pkg.setDateIn(Timestamp.valueOf(rs.getString(3)));
-            pkg.setDateDue(Timestamp.valueOf(rs.getString(4)));
+            if(rs.getString(2) != null)
+                pkg.setDateOut(Timestamp.valueOf(rs.getString(2)));
+            if(rs.getString(3) != null)
+                pkg.setDateIn(Timestamp.valueOf(rs.getString(3)));
+            if(rs.getString(4) != null)
+                pkg.setDateDue(Timestamp.valueOf(rs.getString(4)));
             pkg.setAmount(Double.parseDouble(rs.getString(5)));
+            pkg.setForRentGuid(rs.getString(6));
+
       } else {
           throw new DataException("bad Rental read");
       }
@@ -314,7 +319,34 @@ public class RentalDAO {
 //        return services;
 //    }
 
+    public java.util.List<Rental> loadLateRentals(Timestamp stamp) throws DataException {
+    // get a jdbc connection
 
+      Connection conn = cp.get();
+      LinkedList<Rental> rentals = new LinkedList();
+      String s = stamp.toString();
+      PreparedStatement pstmt;
+        try {
+            pstmt = conn.prepareStatement("select revenueSourceGuid from RENTAL r where r.DATEIN IS NULL AND r.DUEDATE < ?");
+            pstmt.setTimestamp(1, stamp);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String myGuid = rs.getString("revenueSourceGuid");
+                Rental r;
+                try {
+                    r = read(myGuid, conn);
+                } catch (Exception ex) {
+                   throw new DataException("bad read rental");
+                }
+                rentals.add(r);
+            }
+        } catch (SQLException ex) {
+            throw new DataException("bad read all rentals");
+        } finally {
+          cp.release(conn);
+        }
+        return rentals;
+  }
 
 
 

@@ -109,6 +109,10 @@ public class CreateDB {
       "INSERT INTO revenueSource VALUES ('s1', 'line2', 'service', 'comm1')",
       "INSERT INTO revenueSource VALUES ('s2', 'line2', 'service', 'comm2')",
       "INSERT INTO revenueSource VALUES ('r1', 'line1', 'rental', 'comm2')",
+      "INSERT INTO revenueSource VALUES ('r2', 'line1', 'rental', 'comm2')",
+      "INSERT INTO revenueSource VALUES ('r3', 'line1', 'rental', 'comm2')",
+      "INSERT INTO revenueSource VALUES ('r4', 'line1', 'rental', 'comm2')",
+      "INSERT INTO revenueSource VALUES ('r5', 'line1', 'rental', 'comm2')",
 
       "DROP TABLE saleProduct",
       "CREATE TABLE saleProduct(revenueSourceGuid VARCHAR(255), quantity INTEGER, productGuid VARCHAR(255))",
@@ -140,7 +144,11 @@ public class CreateDB {
 
       "DROP TABLE rental",
       "CREATE TABLE rental(revenueSourceGuid VARCHAR(255), dateOut TIMESTAMP, dateIn TIMESTAMP, dueDate TIMESTAMP, amount FLOAT, forRentGuid VARCHAR(255))",
-      "INSERT INTO rental VALUES ('r1', '2004-06-22 10:33:11.840', '2004-06-22 10:33:11.840', '2004-06-22 10:33:11.840', 20, 'phys1')",
+      "INSERT INTO rental VALUES ('r1', '2005-06-22 10:33:11.840', null, '2005-06-28 10:33:11.840', 20, 'phys1')",
+      "INSERT INTO rental VALUES ('r2', '2004-06-22 10:33:11.840', '2004-07-22 10:33:11.840', '2004-06-27 10:33:11.840', 20, 'phys1')",
+      "INSERT INTO rental VALUES ('r3', '2009-06-22 10:33:11.840', '2009-06-28 10:33:11.840', '2009-06-28 10:33:11.840', 20, 'phys1')",
+      "INSERT INTO rental VALUES ('r4', '2009-06-22 10:33:11.840', null, '2009-06-28 10:33:11.840', 20, 'phys1')",
+      "INSERT INTO rental VALUES ('r5', '2009-06-22 10:33:11.840', null, '2009-06-28 10:33:11.840', 20, 'phys1')",
 
       "DROP TABLE forRent",
       "CREATE TABLE forRent(productGuid VARCHAR(255), timesRented INTEGER, isRented VARCHAR(1))",

@@ -87,7 +87,7 @@ public class ForRentDAO {
   /** Internal method to read an existing pkg from the database */
   synchronized ForRent read(String id, Connection conn) throws Exception {
     // check cache
-      ForRent pkg = (ForRent) cache.get(id);
+      ForRent pkg = null;//(ForRent) cache.get(id);
       if(pkg != null) {
           return pkg;
       }

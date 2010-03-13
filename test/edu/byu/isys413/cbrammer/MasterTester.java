@@ -29,14 +29,24 @@ public class MasterTester {
     
 
     /** Test the Test geta all BO/DAO */
-    @Test
-    public void GetAllTest() throws Exception {
-        CustomerDAO.getInstance().getAll();
-        EmployeeDAO.getInstance().getAll();
-        PhysicalProductDAO.getInstance().getAll();
+//    @Test
+//    public void GetAllTest() throws Exception {
+//        CreateDB.main(null);
+//        CustomerDAO.getInstance().getAll();
+//        EmployeeDAO.getInstance().getAll();
+//        PhysicalProductDAO.getInstance().getAll();
 //        ConceptualProductDAO.getInstance().getAll();
-        ProductDAO.getInstance().getAll();
-        AreaOfInterestDAO.getInstance().getAll();
+//        ProductDAO.getInstance().getAll();
+//        AreaOfInterestDAO.getInstance().getAll();
+//    }
+    
+    /** Test the Test geta all BO/DAO */
+    @Test
+    public void TestBatch() throws Exception {
+        
+
+
+        
     }
 //
 //     /** Test the Trans BO/DAO */
