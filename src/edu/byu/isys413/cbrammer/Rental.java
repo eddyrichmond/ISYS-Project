@@ -145,7 +145,28 @@ public class Rental extends RevenueSource {
         return this.getForRent().getConceptualProduct().getName();
     }
 
+    @Override
     public Double getPrice(){
-        return this.getPrice();
+        return this.getForRent().getPrice();
     }
+
+    public int getQuantity(){
+        return 1;
+    }
+
+    public double getCost(){
+        return this.getForRent().getCogs();
+    }
+
+    public String getUPC(){
+        return this.getForRent().getConceptualProduct().getUPC();
+    }
+
+    public String getDesc(){
+        return this.getForRent().getConceptualProduct().getDescription();
+    }
+
+    
+
+    
 }

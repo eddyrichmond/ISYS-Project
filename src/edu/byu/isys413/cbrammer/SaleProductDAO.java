@@ -159,11 +159,7 @@ public class SaleProductDAO {
     // update the cache
         cache.put(pkg.getId(), pkg);
 
-        Boolean dirtyFlag = pkg.isDirty();
-        Boolean inDB = pkg.isObjectAlreadyInDB();
         
-        pkg.setDirty(dirtyFlag);
-        pkg.setObjectAlreadyInDB(inDB);
         
         
     // if not dirty, return

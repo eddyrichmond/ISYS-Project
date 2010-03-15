@@ -16,6 +16,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,8 +29,11 @@ public class LoginWindow extends javax.swing.JFrame {
     /** Creates new form LoginWindow */
     public LoginWindow() {
         initComponents();
-
-    
+        try {
+            CreateDB.main(null);
+        } catch (Exception ex) {
+            Logger.getLogger(LoginWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -155,9 +160,6 @@ public class LoginWindow extends javax.swing.JFrame {
         }else{
             System.out.println("Authentication didn't work.");
         }
-
-  
-        
     }//GEN-LAST:event_LogInButtonMouseClicked
 
     /**

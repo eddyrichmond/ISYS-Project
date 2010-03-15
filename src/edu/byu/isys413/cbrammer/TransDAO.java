@@ -180,6 +180,7 @@ public class TransDAO {
   void save(Trans pkg, Connection conn) throws Exception {
     // update the cache
         cache.put(pkg.getId(), pkg);
+
         for(TransLine transLine:pkg.getTransList()) {
             TransLineDAO.getInstance().save(transLine, conn);
         }

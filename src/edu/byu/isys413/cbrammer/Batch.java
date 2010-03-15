@@ -57,6 +57,8 @@ public class Batch {
         String[] cc={"cbrammer@gmail.com"};
         String[] bcc={"cbrammer@gmail.com"};
 //        SendEmail.sendMail("cbrammer@gmail.com","+sNq0UbJ!D-GV5A","smtp.gmail.com","465","true", "true",true,"javax.net.ssl.SSLSocketFactory","false",to,cc,bcc,"Congrats","You just bought your rental product");
+        
+
     }
 
 }

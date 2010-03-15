@@ -146,6 +146,9 @@ public class RevenueSourceDAO {
   /** Internal method to update pkg pkg in the database */
   void save(RevenueSource pkg, Connection conn) throws Exception {
 
+      if(pkg.getComm() != null)
+            CommissionDAO.getInstance().save(pkg.getComm(), conn);
+
     // if not dirty, return
       if(!pkg.isDirty() && pkg.isObjectAlreadyInDB()) {
           return;

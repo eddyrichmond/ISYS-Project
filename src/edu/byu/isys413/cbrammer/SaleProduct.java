@@ -32,7 +32,13 @@ public class SaleProduct extends RevenueSource {
 
     @Override
     public void save(Connection conn) throws Exception {
+        Boolean _dirtyFlag = isDirty();
+        Boolean _inDB = isObjectAlreadyInDB();
+
         SaleProductDAO.getInstance().save(this, conn);
+
+        setDirty(_dirtyFlag);
+        setObjectAlreadyInDB(_inDB);
         super.save(conn);
     }
 

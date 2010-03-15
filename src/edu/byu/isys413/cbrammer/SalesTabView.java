@@ -493,6 +493,10 @@ public class SalesTabView extends javax.swing.JPanel {
                     Rental r = RentalDAO.getInstance().create(GUID.generate());
                     r.setForRent(fr);   
                     r.setType("rental");
+                    r.setDateOut(null);
+                    r.setDateIn(null);
+                    r.setDateDue(null);
+                    r.setAmount(total);
                     
                     searchListModel.addElement(r);
                 }
@@ -521,10 +525,19 @@ public class SalesTabView extends javax.swing.JPanel {
 
         // Set the vals the RS
         RevenueSource rs = (RevenueSource) searchList.getSelectedValue();
+        Commission comm = null;
+        try {
+            comm = CommissionDAO.getInstance().create(GUID.generate());
+        } catch (DataException ex) {
+            Logger.getLogger(SalesTabView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        comm.setAmount(100.00);//subtotal * (trans.getEmployee().getCommissionRate()/100));
+        comm.setPaid("0");
+        rs.setComm(comm);
+
         rs.setTransLine(transLine);
         transLine.setRs(rs);
         transLine.setTrans(trans);
-
         //Set the trans line in the trans
         trans.getTransList().add(transLine);
 
@@ -554,7 +567,7 @@ public class SalesTabView extends javax.swing.JPanel {
 
         // shortcuts
         Payment p = trans.getPayment();
-        Commission comm = trans.getCommission();
+        
         JournalEntry je = trans.getJournal();
 
         // Set the payment details
@@ -562,9 +575,7 @@ public class SalesTabView extends javax.swing.JPanel {
         p.setChange(0);
         p.setType("Cash");
 
-        // Set the commission details
-        comm.setAmount(subtotal * (trans.getEmployee().getCommissionRate()/100));
-        comm.setPaid("No");
+       
 
         // Set the accounting items
         makeAccounting(je, "Cash", "Debit", total);
@@ -572,8 +583,8 @@ public class SalesTabView extends javax.swing.JPanel {
         makeAccounting(je, "Sales Tax", "Credit", taxTotal);
         makeAccounting(je, "Cost of Goods Sold", "Debit", cogs);
         makeAccounting(je, "Inventory", "Credit", cogs);
-        makeAccounting(je, "Commission Payable", "Credit", comm.getAmount());
-        makeAccounting(je, "Commission Expense", "Debit", comm.getAmount());
+        makeAccounting(je, "Commission Payable", "Credit", 100.00);//comm.getAmount());
+        makeAccounting(je, "Commission Expense", "Debit", 100.00);//comm.getAmount());
 
         // Save it out
         try{
